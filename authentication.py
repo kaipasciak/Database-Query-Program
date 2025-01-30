@@ -7,7 +7,7 @@ from firebase_admin import firestore
 
 def init_db():
     #   Using the private key file generated on the firebase console
-    cred = credentials.Certificate("./vgsales_query_cli_private_key.json")
+    cred = credentials.Certificate("vgsales_query_cli_private_key.json")
     app = firebase_admin.initialize_app(cred)
     db = firestore.client()
     return db
