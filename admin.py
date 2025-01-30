@@ -12,6 +12,8 @@ file_path = sys.argv[1]
 # must be vgsales.csv file for program to work
 if file_path == 'vgsales.csv':
     df = pd.read_csv(file_path)
+    # making the year an int not a double
+    df['Year'] = df['Year'].astype(int)
 
     # creating json file to store in firebase
     result = df.to_json(orient='records')
