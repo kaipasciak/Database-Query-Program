@@ -10,12 +10,12 @@ import authentication
 file_path = "vgsales.csv"
 df = pd.read_csv(file_path)
 
-# creating json file
+# creating json file to store in firebase
 result = df.to_json(orient='records')
-
 parsed = loads(result)
 dumps(parsed)
 
+# calling the init_db function in authentication, which returns a reference to the data base
 db = authentication.init_db()
 
 # deleting everything from firebase
@@ -23,9 +23,9 @@ docs = db.collection('video_games').list_documents()
 for doc in docs:
     doc.delete()
 
-# adding eveythign back to firebase
+# adding everything back to firebase
 for i in parsed:
     db.collection('video_games').document(str(i['Rank'])).set(i)
 
-# displaying json file
-print(dumps(parsed))
+# # displaying json file
+# print(dumps(parsed))
