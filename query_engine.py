@@ -40,7 +40,7 @@ def print_query_result(result: list[dict[string,any]]):
         row_output = ""
         keys = row.keys()
         if 'Name' in keys:
-            row_output += row['Name'].center(46) + "|"
+            row_output += row['Name'].ljust(46) + "|"
         if 'Year' in keys:
             row_output += str(row['Year']).center(8) + "|"
         if 'Platform' in keys:
@@ -50,4 +50,4 @@ def print_query_result(result: list[dict[string,any]]):
         print(row_output)
 
 db = authentication.init_db()
-print_query_result(query(db, "getcol", ["Name"], [("Year", ">", 2000), ("Name", "==", "Gran Turismo 3: A-Spec")]))
+print_query_result(query(db, "getcol", ["Name", "Year"], []))
