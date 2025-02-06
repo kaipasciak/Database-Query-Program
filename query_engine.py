@@ -4,7 +4,7 @@ import authentication
 
 # Takes a type, the cols requested, and conditions and returns a list of objects from the database
 # two types: getgames and getcol
-def query(db, type: string, cols: list[string], conditions: list[tuple[string, string, string]]):
+def query(db, type: string, cols: list[string], conditions: list[tuple[string, string, any]]):
     # get a reference to the video_games collection
     vgs = db.collection('video_games')
     games = []
@@ -50,4 +50,4 @@ def print_query_result(result: list[dict[string,any]]):
         print(row_output)
 
 db = authentication.init_db()
-print_query_result(query(db, "getcol", ["Name", "Year"], []))
+print_query_result(query(db, "getgames", ["Name", "Year", "Platform"], []))

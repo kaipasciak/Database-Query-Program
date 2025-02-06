@@ -40,6 +40,7 @@ def parser():
             template = (pp.QuotedString('"') | pp.Word(pp.alphas))[0, 7]
             parsed = template.parseString(userInput)
 
+
             # Error handling
 
             # Call query function
