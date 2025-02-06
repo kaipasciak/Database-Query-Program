@@ -13,7 +13,7 @@ file_path = sys.argv[1]
 if file_path == 'vgsales.csv':
     df = pd.read_csv(file_path)
     # making the year an int not a double
-    df['Year'] = df['Year'].astype(int)
+    df['year'] = df['year'].astype(int)
 
     # creating json file to store in firebase
     result = df.to_json(orient='records')
@@ -30,7 +30,7 @@ if file_path == 'vgsales.csv':
 
     # adding everything back to firebase
     for i in parsed:
-        db.collection('video_games').document(str(i['Rank'])).set(i)
+        db.collection('video_games').document(str(i['rank'])).set(i)
 else:
     print("Incorrect file! Make sure you're entering vgsales.csv as your filename")
 
