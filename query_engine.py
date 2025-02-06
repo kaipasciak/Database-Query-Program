@@ -21,33 +21,34 @@ def query(db, type: string, cols: list[string], conditions: list[tuple[string, s
         return games
     elif type == "getcol":
         ret_game = {}
-        for col in cols:
-            ret_game[col] = games[0][col]
-        return [ret_game]
+        if games:
+            for col in cols:
+                ret_game[col] = games[0][col]
+            return [ret_game]
+        else:
+            return []
 
 def print_query_result(result: list[dict[string,any]]):
     header = ""
-    if 'Name' in result[0].keys():
+    if 'name' in result[0].keys():
         header += "Name".center(46) + "|"
-    if 'Year' in result[0].keys():
+    if 'year' in result[0].keys():
         header += "Year".center(8) + "|"
-    if 'Platform' in result[0].keys():
+    if 'platform' in result[0].keys():
         header += "Platform".center(12) + "|"
-    if 'Global_Sales' in result[0].keys():
+    if 'sales' in result[0].keys():
         header += "Global_Sales (millions)".center(27)
     print(header.format("","","",""))
     for row in result:
         row_output = ""
         keys = row.keys()
-        if 'Name' in keys:
-            row_output += row['Name'].ljust(46) + "|"
-        if 'Year' in keys:
-            row_output += str(row['Year']).center(8) + "|"
-        if 'Platform' in keys:
-            row_output += row['Platform'].center(12) + "|"
-        if 'Global_Sales' in keys:
-            row_output += str(row['Global_Sales']).center(27)
+        if 'name' in keys:
+            row_output += row['name'].ljust(46) + "|"
+        if 'year' in keys:
+            row_output += str(row['year']).center(8) + "|"
+        if 'platform' in keys:
+            row_output += row['platform'].center(12) + "|"
+        if 'sales' in keys:
+            row_output += str(row['sales']).center(27)
         print(row_output)
-
-db = authentication.init_db()
-print_query_result(query(db, "getgames", ["Name", "Year", "Platform"], []))
+        print()
