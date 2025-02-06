@@ -20,7 +20,7 @@ if file_path == 'vgsales.csv':
     parsed = loads(result)
     dumps(parsed)
 
-    # calling the init_db function in authentication, which returns a reference to the data base
+    # calling the init_db function in authentication, which returns a reference to the firestore database
     db = authentication.init_db()
 
     # deleting everything from firebase
@@ -32,6 +32,7 @@ if file_path == 'vgsales.csv':
     for i in parsed:
         db.collection('video_games').document(str(i['rank'])).set(i)
 else:
+    # note that we hard-coded the name of the CSV to use here.
     print("Incorrect file! Make sure you're entering vgsales.csv as your filename")
 
 
