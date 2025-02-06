@@ -8,7 +8,7 @@ import database_config
 import authentication
 import warnings
 
-MAX_QUERY_LENGTH = 100
+MAX_QUERY_LENGTH = 100 #high number because we need a maximum word count
 
 
 # Prompt the user for input and call the query function until program manually terminated
@@ -70,6 +70,7 @@ def parser():
                 if parsed[1].lower() in database_config.database_columns:
                     type = "getcol"
                     if parsed[2].lower() == "of":
+                        #queries of this form must have exactly 4 words
                         if len(parsed) > 4:
                             print("Incorrect Syntax. Type 'help' for more information")
                             valid = False
@@ -78,6 +79,7 @@ def parser():
 
                 elif parsed[1].lower() == "games":
                     type = "getgames"
+                    #get the conditions, starting with "where"
                     conditions = getConditions(parsed[2:])
                     if conditions == "INVALID":
                         print("Incorrect Syntax. Type 'help' for more information")
@@ -101,6 +103,9 @@ def getConditions(parsed):
 
     returnList = []
     try:
+        #must have a multiple of 4 words
+        #phrases are in the form "where"/"and", {column}, {operator}, {value}
+        #the last three of each phrase are passed on as conditions
         if len(parsed) % 4 != 0:
             raise AssertionError
         for i in range(len(parsed)//4):
