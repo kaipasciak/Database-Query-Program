@@ -13,14 +13,14 @@ file_path = sys.argv[1]
 if file_path == 'vgsales.csv':
     df = pd.read_csv(file_path)
     # making the year an int not a double
-    df['Year'] = df['Year'].astype(int)
+    df['year'] = df['year'].astype(int)
 
     # creating json file to store in firebase
     result = df.to_json(orient='records')
     parsed = loads(result)
     dumps(parsed)
 
-    # calling the init_db function in authentication, which returns a reference to the data base
+    # calling the init_db function in authentication, which returns a reference to the firestore database
     db = authentication.init_db()
 
     # deleting everything from firebase
@@ -33,7 +33,9 @@ if file_path == 'vgsales.csv':
         db.collection('video_games').document(str(i['Rank'])).set(i)
 
     print("Updated all firebase information")
+    db.collection('video_games').document(str(i['rank'])).set(i)
 else:
+    # note that we hard-coded the name of the CSV to use here.
     print("Incorrect file! Make sure you're entering vgsales.csv as your filename")
 
 
