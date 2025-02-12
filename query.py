@@ -38,9 +38,9 @@ def parser():
                   "of a specific game.\n The platforms and Names of games are CASE-SENSITIVE.\n\n"
                   "OR\n\'Get games where {condition}...\' to filter results\n"
                   "Condition Syntax:\n"
-                  "\'where platform is {platform name}\'\n"
-                  "\'where sales is greater/less than {sale amount}\'\n"
-                  "\'released before/after {year}\'\n"
+                  "\'where platform == {platform name}\'\n"
+                  "\'where sales >/>=/</<=/== {sale amount}\'\n"
+                  "\'where year >/>=/</<=/== {year}\'\n"
                   "NOTE:\n - For game or platform names with multiple words, use"
                   " double quotes.\n - Multiple conditions may be added and separated"
                   "by \'and\'.\n")

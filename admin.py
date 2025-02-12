@@ -30,7 +30,10 @@ if file_path == 'vgsales.csv':
 
     # adding everything back to firebase
     for i in parsed:
-        db.collection('video_games').document(str(i['rank'])).set(i)
+        db.collection('video_games').document(str(i['Rank'])).set(i)
+
+    print("Updated all firebase information")
+    db.collection('video_games').document(str(i['rank'])).set(i)
 else:
     # note that we hard-coded the name of the CSV to use here.
     print("Incorrect file! Make sure you're entering vgsales.csv as your filename")
